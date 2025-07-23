@@ -1,18 +1,27 @@
 # LLM Session Quick Start Guide
 
-## 🚀 Immediate Actions (First 30 seconds)
+## 🚀 Enhanced Immediate Actions (First 30 seconds)
 
-### 1. Read Session Context (CRITICAL)
+### 1. Context Health Validation (NEW - CRITICAL)
+```
+1. VALIDATE: Check if all required context files exist
+2. FRESHNESS: Check file timestamps and warn if stale (>7 days)
+3. CONSISTENCY: Cross-check information between files for conflicts
+4. BACKUP: Note current state before any changes
+```
+
+### 2. Read Session Context with Validation
 ```
 1. READ: dynamic/session-handoff.md (immediate context)
 2. READ: dynamic/current-iteration.md (active hypothesis)
 3. READ: static/environment.md (hardware/software constraints - ESSENTIAL)
 4. CHECK: dynamic/failed-solutions/ (MANDATORY before suggesting solutions)
 5. REFERENCE: evolving/assumptions-log.md (validation history)
+6. VALIDATE: Confirm understanding of context before proceeding
 ```
 
-### 2. Generate Context-Specific Questions
-After reading the context files, ask the human 3-5 specific questions based on what you discovered.
+### 3. Generate Context-Specific Questions with Understanding Validation
+After reading the context files, ask the human 3-5 specific questions based on what you discovered, then validate your understanding.
 
 **IMPORTANT:** Use `guides/llm-context-question-guide.md` for detailed guidance on generating appropriate questions.
 
@@ -56,14 +65,25 @@ python3 dynamic/assumption-validator.py --stability-hours 0.1
 4. **Add Validation:** Update assumption-validator.py with new test methods
 5. **Set Handoff:** Update session-handoff.md with new iteration context
 
-### For Ending Sessions
+### For Ending Sessions with Enhanced Verification
 **IMPORTANT:** Use `guides/llm-session-closure-guide.md` for detailed guidance on proper session closure.
 
-**Quick Closure Framework:**
-1. **Assess Accomplishments:** Analyze what was completed and discovered
-2. **Update Context Files:** session-handoff.md, current-iteration.md, assumptions-log.md
-3. **Generate Closure Questions:** Ask context-specific questions about next session priorities
-4. **Prepare Next Session:** Provide clear recommendations for next session focus
+**Enhanced Closure Framework:**
+1. **Pre-Save Validation:** Assess what was completed and validate completeness
+2. **Create Backup:** Create timestamped backup of all context files before updates
+3. **Update Files with Verification:** Update all context files and verify each update succeeded
+4. **Quality Validation:** Check that updated context meets quality standards
+5. **Generate Closure Questions:** Ask context-specific questions about next session priorities
+6. **Confirm Proper Closure:** Validate that all information was captured and next session is prepared
+
+**File Update Verification Checklist:**
+- [ ] session-handoff.md updated with next session priorities
+- [ ] current-iteration.md updated with progress and status
+- [ ] assumptions-log.md updated with new evidence/validation results
+- [ ] working-solutions.md updated with any new working commands
+- [ ] failed-solutions/ updated with any failed approaches
+- [ ] knowledge-base/ updated with new insights (if applicable)
+- [ ] daily log created in archive/daily-logs/
 
 ## 🔧 Essential Commands
 
@@ -95,6 +115,38 @@ cd /path/to/your/main/project
 ```
 
 ## ⚠️ Critical Rules
+
+### CRITICAL: LM_context/ vs Project Knowledge Distinction
+
+**What LM_context/ Contains (Session Management):**
+- **Session state and handoffs** - Where you left off, what's next
+- **Iteration tracking and progress** - Current goals, success criteria, completion status  
+- **Working/failed solution patterns** - What works, what doesn't, why
+- **Optimization guides and workflows** - How to work efficiently
+
+**What Lives in Project Root (NOT in LM_context/):**
+- **Source code and implementations** - Actual project deliverables
+- **Technical documentation** - API docs, architecture guides, tutorials
+- **Build systems and scripts** - Working project scripts and configurations
+- **Domain expertise** - Complete knowledge bases and reference materials
+
+**LLM Behavior Rules:**
+- **DO:** Update LM_context/ files with session progress and solution patterns
+- **DON'T:** Put complete tutorials, API documentation, or source code in LM_context/
+- **DO:** Reference project files when needed, but keep context focused on session management
+- **DON'T:** Duplicate project knowledge in context files - use references instead
+
+**Example - GStreamer Project:**
+```
+✅ CORRECT in LM_context/: "Working solution: gst-launch-1.0 v4l2src ! tee ! udpsink"
+❌ WRONG in LM_context/: Complete GStreamer plugin development tutorial
+
+✅ CORRECT in LM_context/: "Failed: RTSP streaming (>200ms latency)"  
+❌ WRONG in LM_context/: Full RTSP protocol specification
+
+✅ CORRECT in LM_context/: "Next: Test multi-consumer tee performance"
+❌ WRONG in LM_context/: Complete melexis_v4l2.h API documentation
+```
 
 ### ALWAYS Use Validation Script
 - **Never** manually test assumptions

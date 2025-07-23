@@ -2,9 +2,9 @@
 
 ## 🚀 One-Line Session Commands
 
-### Session Start (Copy-Paste)
+### Enhanced Session Start with Validation (Copy-Paste)
 ```
-Start session: Read context (session-handoff, current-iteration, environment, failed-solutions), ask 3-5 specific questions based on what you find, then summarize status and next actions.
+Start session with validation: Check context health, validate files exist, read context with freshness check (session-handoff, current-iteration, environment, failed-solutions), ask 3-5 specific questions with understanding validation, confirm readiness before proceeding.
 ```
 
 ### Project Type-Specific Session Start (Copy-Paste)
@@ -29,9 +29,9 @@ Start documentation session: Read context (session-handoff, current-iteration, p
 Start collaborative session: Read context (session-handoff, current-iteration, assumptions-log, working-solutions), ask about team members/decision process/communication channels, focus on coordination and knowledge sharing, summarize team status and next collaboration actions.
 ```
 
-### Session End (Copy-Paste)  
+### Enhanced Session End with Verification (Copy-Paste)  
 ```
-End session: Compile knowledge (update working-solutions.md, failed-solutions/, create daily log in archive/daily-logs/), update session-handoff.md and current-iteration.md, update knowledge base in static/knowledge-base/, ask closure questions about knowledge completeness and next priorities.
+End session with verification: Create backup, compile knowledge with quality checks (update working-solutions.md, failed-solutions/, create daily log in archive/daily-logs/), update files with verification (session-handoff.md, current-iteration.md, knowledge-base/), ask closure questions with completeness check, confirm proper closure.
 ```
 
 ### Emergency Reset (Copy-Paste)

@@ -3,6 +3,25 @@
 **PRIMARY GOAL:** Generate optimized LLM context management systems for new projects  
 **EVOLUTION METHOD:** Research-driven development through systematic knowledge accumulation
 
+## 🔄 How the System Works - Visual Process Flow
+
+**CRITICAL:** Before using this system, understand the collaborative workflow between humans and LLM agents:
+
+📊 **[Context Flow Diagrams](guides/context-flow-diagrams.md)** - **READ THIS FIRST**
+- **Context Restoration Flow:** How sessions start with validated context loading
+- **Context Saving Flow:** How sessions end with verified knowledge preservation  
+- **Actor Responsibilities:** Clear distinction between human and LLM agent actions
+- **Process Improvements:** Enhanced workflows with validation and backup mechanisms
+
+**Key Insights from Flowcharts:**
+- **Human triggers** session start/end with copy-paste commands
+- **LLM validates** context health before reading files
+- **System creates backups** before any context updates
+- **Quality checks** ensure context integrity throughout
+- **Recovery mechanisms** handle failures gracefully
+
+**Understanding these flows is essential for effective system usage.**
+
 ---
 
 ## 🚀 Quick Start - Generate Context System for Your Project
@@ -154,6 +173,39 @@ Scope update: Requirements changed - [describe changes]. Analyze impact on curre
 ```
 
 ---
+
+## 🎯 Critical Distinction: LLM Context vs Project Knowledge
+
+### What the LLM Context System Manages:
+- **Session state and handoffs** - Where you left off, what's next
+- **Iteration tracking and progress** - Current goals, success criteria, completion status
+- **Working/failed solution patterns** - What works, what doesn't, why
+- **Optimization guides and workflows** - How to work efficiently with the system
+
+### What Lives in Your Project (NOT in LM_context/):
+- **Technical documentation** - API docs, architecture guides, user manuals
+- **Domain expertise** - Business logic, domain-specific knowledge, requirements
+- **Learning materials** - Tutorials, courses, reference materials
+- **Code and implementation** - Source code, configuration files, build scripts
+- **Project deliverables** - Final outputs, reports, presentations
+
+### Why This Separation Matters:
+- **LLM Context** optimizes session efficiency and knowledge transfer between LLM interactions
+- **Project Knowledge** contains the actual work products and domain expertise
+- **Mixing them** creates bloated context files that slow down LLM sessions
+- **Separating them** allows the context system to focus on its core purpose: seamless LLM collaboration
+
+### Example: GStreamer Project
+```
+✅ IN LM_context/: "Current iteration is testing multi-consumer pipeline performance"
+❌ NOT in LM_context/: Complete GStreamer API documentation
+
+✅ IN LM_context/: "Working solution: gst-launch-1.0 v4l2src ! tee ! queue ! udpsink"
+❌ NOT in LM_context/: Full GStreamer plugin development tutorial
+
+✅ IN LM_context/: "Failed approach: direct RTSP streaming (latency issues)"
+❌ NOT in LM_context/: Complete RTSP protocol specification
+```
 
 ## 📊 What You Get
 
