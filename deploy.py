@@ -37,7 +37,7 @@ class LLMContextDeployer:
             raise FileNotFoundError(f"LM_context directory not found: {self.lm_context_dir}")
             
         # Check for available guides in the new structure
-        guide_dirs = ["human-guides", "llm-guides", "system-docs"]
+        guide_dirs = ["human-guides", "llm-guides"]
         total_guides = 0
         for guide_dir in guide_dirs:
             guide_path = self.lm_context_dir / guide_dir
@@ -57,7 +57,6 @@ class LLMContextDeployer:
             "LM_context",
             "LM_context/human-guides",
             "LM_context/llm-guides", 
-            "LM_context/system-docs",
             "LM_context/static",
             "LM_context/static/knowledge-base", 
             "LM_context/static/resources",
