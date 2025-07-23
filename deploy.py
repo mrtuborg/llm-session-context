@@ -25,23 +25,29 @@ class LLMContextDeployer:
         self.target_dir = Path(target_directory).resolve()
         self.project_type = project_type
         self.script_dir = Path(__file__).parent.resolve()
-        self.guides_dir = self.script_dir / "guides"
+        self.lm_context_dir = self.script_dir / "LM_context"
         self.templates_dir = self.script_dir / "templates"
         
     def validate_environment(self):
         """Validate that the deployment environment is ready."""
         print("🔍 Validating deployment environment...")
         
-        # Check if script directory has required files
-        if not self.guides_dir.exists():
-            raise FileNotFoundError(f"Guides directory not found: {self.guides_dir}")
+        # Check if LM_context directory has required files
+        if not self.lm_context_dir.exists():
+            raise FileNotFoundError(f"LM_context directory not found: {self.lm_context_dir}")
             
-        # Check for available guides (don't require all to exist)
-        available_guides = list(self.guides_dir.glob("*.md"))
-        if not available_guides:
-            raise FileNotFoundError(f"No guide files found in: {self.guides_dir}")
+        # Check for available guides in the new structure
+        guide_dirs = ["human-guides", "llm-guides", "system-docs"]
+        total_guides = 0
+        for guide_dir in guide_dirs:
+            guide_path = self.lm_context_dir / guide_dir
+            if guide_path.exists():
+                total_guides += len(list(guide_path.glob("*.md")))
+        
+        if total_guides == 0:
+            raise FileNotFoundError(f"No guide files found in LM_context structure")
             
-        print(f"✅ Environment validation passed - Found {len(available_guides)} guide files")
+        print(f"✅ Environment validation passed - Found {total_guides} guide files")
         
     def create_directory_structure(self):
         """Create the standard LM_context directory structure."""
@@ -59,9 +65,7 @@ class LLMContextDeployer:
             "LM_context/dynamic",
             "LM_context/dynamic/failed-solutions",
             "LM_context/archive",
-            "LM_context/archive/daily-logs",
-            "LM_context/knowledge",
-            "LM_context/knowledge/foundational-elements"
+            "LM_context/archive/daily-logs"
         ]
         
         for directory in directories:
@@ -74,6 +78,7 @@ class LLMContextDeployer:
         print("📋 Copying system guides...")
         
         # Define guide categories and their target directories
+        # NOTE: system-docs files moved to knowledge/ and are NOT deployed to new projects
         guide_categories = {
             "human-guides": [
                 "human-maintenance-guide.md",
@@ -82,13 +87,6 @@ class LLMContextDeployer:
             "llm-guides": [
                 "llm-session-quick-start.md", 
                 "llm-context-question-guide.md"
-            ],
-            "system-docs": [
-                "context-flow-diagrams.md",
-                "cost-optimization-analysis.md",
-                "session-knowledge-compilation.md",
-                "system-setup-instructions.md",
-                "troubleshooting-comprehensive.md"
             ]
         }
         
@@ -98,7 +96,7 @@ class LLMContextDeployer:
             target_dir.mkdir(exist_ok=True)
             
             for guide_file in guide_files:
-                source_file = self.guides_dir / guide_file
+                source_file = self.lm_context_dir / category / guide_file
                 if source_file.exists():
                     target_file = target_dir / guide_file
                     shutil.copy2(source_file, target_file)

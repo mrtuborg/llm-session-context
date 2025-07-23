@@ -7,7 +7,7 @@
 
 **CRITICAL:** Before using this system, understand the collaborative workflow between humans and LLM agents:
 
-📊 **[Context Flow Diagrams](guides/context-flow-diagrams.md)** - **READ THIS FIRST**
+📊 **[Context Flow Diagrams](knowledge/context-flow-diagrams.md)** - **READ THIS FIRST**
 - **Context Restoration Flow:** How sessions start with validated context loading
 - **Context Saving Flow:** How sessions end with verified knowledge preservation  
 - **Actor Responsibilities:** Clear distinction between human and LLM agent actions
@@ -274,7 +274,7 @@ cd /path/to/LLM_Context_System
 4. **Research foundational elements** by analyzing effectiveness patterns
 
 #### **Step 3: Enhance the Generator**
-1. **Update templates** in `guides/` based on research insights
+1. **Update templates** in `LM_context/` based on research insights
 2. **Improve deployment logic** in `deploy.py` with new optimization strategies
 3. **Add validation capabilities** to automatically assess system effectiveness
 4. **Test enhancements** by deploying to new projects and measuring results
@@ -291,7 +291,7 @@ cd /path/to/LLM_Context_System
 
 ### **Core Components**
 - **`deploy.py`** - Intelligent deployment script that creates customized context systems
-- **`guides/`** - Template library with domain-specific optimizations
+- **`LM_context/`** - Template library with domain-specific optimizations (human-guides, llm-guides)
 - **`knowledge/`** - Research and development knowledge base for continuous improvement
 - **`LM_context/`** - The system managing its own development (self-hosting)
 
@@ -364,19 +364,19 @@ The system is built on research-validated foundational elements:
 ## 🔗 Resources
 
 ### **Getting Started**
-- **[System Setup Instructions](guides/system-setup-instructions.md)** - Detailed deployment guide
-- **[Quick Start Guide](guides/llm-session-quick-start.md)** - Fast track to using the system
-- **[Human Quick Commands](guides/human-quick-commands.md)** - Essential commands and workflows
+- **[System Setup Instructions](knowledge/system-setup-instructions.md)** - Detailed deployment guide
+- **[Quick Start Guide](LM_context/llm-guides/llm-session-quick-start.md)** - Fast track to using the system
+- **[Human Quick Commands](LM_context/human-guides/human-quick-commands.md)** - Essential commands and workflows
 
 ### **Advanced Usage**
-- **[Session Knowledge Compilation](guides/session-knowledge-compilation.md)** - Advanced knowledge management
-- **[Cost Optimization Analysis](guides/cost-optimization-analysis.md)** - Token usage optimization
-- **[Troubleshooting Guide](guides/troubleshooting-comprehensive.md)** - Problem resolution
+- **[Session Knowledge Compilation](knowledge/session-knowledge-compilation.md)** - Advanced knowledge management
+- **[Cost Optimization Analysis](knowledge/cost-optimization-analysis.md)** - Token usage optimization
+- **[Troubleshooting Guide](knowledge/troubleshooting-comprehensive.md)** - Problem resolution
 
 ### **System Evolution**
 - **[Knowledge Base](knowledge/README.md)** - Research and development documentation
 - **[Foundational Elements Specification](LM_context/evolving/foundational-elements-specification.md)** - System evolution framework
-- **[Human Maintenance Guide](guides/human-maintenance-guide.md)** - System maintenance and improvement
+- **[Human Maintenance Guide](LM_context/human-guides/human-maintenance-guide.md)** - System maintenance and improvement
 
 ---
 

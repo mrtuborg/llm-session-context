@@ -181,11 +181,29 @@ cd /path/to/your/main/project
 - **Case studies** - Real project applications and lessons learned
 - **Foundational elements** - Core concepts and principles discovered
 
+**🚨 CRITICAL VALIDATION PROCESS - ALWAYS ASK BEFORE PLACING FILES:**
+
+**When unsure about file placement, ALWAYS ask the human:**
+```
+"Is this about session management or learning content?"
+
+If session management → LM_context/
+If learning content → knowledge/
+```
+
+**Follow-up Testing Questions:**
+1. "Does this teach HOW to do something?" → knowledge/
+2. "Does this track WHERE we are in work?" → LM_context/
+3. "Would this help in future sessions to understand progress?" → LM_context/
+4. "Would this help understand concepts or techniques?" → knowledge/
+
 **LLM Behavior Rules for LLM Context System Development:**
+- **MANDATORY:** Ask validation question when file placement is unclear
 - **DO:** Put development insights in knowledge/foundational-elements/
 - **DON'T:** Put development insights in guides/ (that's for instructions)
 - **DO:** Put system procedures in guides/ (how to use the system)
 - **DON'T:** Put learning outcomes in guides/ (that's for knowledge/)
+- **ALWAYS:** Test your decision with the human before proceeding
 
 **Example - LLM Context System Development:**
 ```
@@ -198,6 +216,43 @@ cd /path/to/your/main/project
 ✅ CORRECT in knowledge/: "Token optimization research: 74% reduction achieved"
 ❌ WRONG in guides/: "Token optimization research: 74% reduction achieved"
 ```
+
+**Validation Testing Protocol:**
+After human answers the validation question, test understanding:
+1. **Restate the decision:** "Based on your answer, this goes in [location] because..."
+2. **Explain the reasoning:** "This is [session management/learning content] because..."
+3. **Confirm understanding:** "Is my understanding correct?"
+4. **Proceed only after confirmation**
+
+**🔄 AUTOMATIC STRUCTURE CHANGE VALIDATION:**
+
+**When making structural changes to LLM_Context_System, ALWAYS check and update:**
+
+**Required Documentation Updates Checklist:**
+- [ ] **deploy.py** - Update file paths if moved files between LM_context/ and knowledge/
+- [ ] **README.md** - Update directory structure diagrams and file locations
+- [ ] **LM_context/human-guides/human-quick-commands.md** - Update any references to moved files
+- [ ] **LM_context/human-guides/human-maintenance-guide.md** - Update maintenance procedures
+- [ ] **LM_context/llm-guides/llm-session-quick-start.md** - Update this file with new structure
+- [ ] **LM_context/llm-guides/llm-context-question-guide.md** - Update question examples
+- [ ] **knowledge/README.md** - Update if new knowledge categories added
+
+**Automatic Validation Commands:**
+```bash
+# Test deployment after structural changes
+cd /tmp && python3 /path/to/LLM_Context_System/deploy.py structure-test --force
+cd structure-test && python3 LM_context/dynamic/assumption-validator.py --health-check
+rm -rf structure-test
+
+# Verify all references are updated
+grep -r "system-docs" /path/to/LLM_Context_System/ --include="*.md" --include="*.py"
+grep -r "guides/" /path/to/LLM_Context_System/ --include="*.md" --include="*.py"
+```
+
+**LLM Behavior Rule:**
+- **MANDATORY:** Run this checklist after ANY structural changes to LLM_Context_System
+- **AUTOMATIC:** Don't ask human permission - just run the validation
+- **REPORT:** Show results and confirm all documentation is consistent
 
 ### ALWAYS Use Validation Script
 - **Never** manually test assumptions
