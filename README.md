@@ -244,7 +244,7 @@ The system is built on research-validated foundational elements:
 
 **Version:** 1.0  
 **Status:** Production Ready - Continuously Evolving  
-**License:** Open Source - Community Driven Development  
+**License:** MIT License - See [LICENSE](LICENSE) file  
 **Support:** Research-Driven Community Support
 
 ---
