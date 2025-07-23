@@ -17,8 +17,23 @@
 3. READ: static/environment.md (hardware/software constraints - ESSENTIAL)
 4. CHECK: dynamic/failed-solutions/ (MANDATORY before suggesting solutions)
 5. REFERENCE: evolving/assumptions-log.md (validation history)
-6. VALIDATE: Confirm understanding of context before proceeding
+6. ON-DEMAND: static/resources/ (technical documentation when needed)
+7. VALIDATE: Confirm understanding of context before proceeding
 ```
+
+### 2.1. On-Demand Technical Documentation Access
+**When to access static/resources/:**
+- Hardware troubleshooting requiring specifications
+- Performance optimization needing capability details
+- Protocol implementation requiring interface specs
+- Error diagnosis needing register maps or error codes
+- Feature validation requiring capability matrices
+
+**How to use static/resources/:**
+1. **Check README first:** `static/resources/README.md` lists available documents
+2. **Extract specific sections:** Don't read entire PDFs, focus on relevant chapters
+3. **Reference page numbers:** Include specific page/section references in solutions
+4. **Update context:** Add key findings to relevant context files
 
 ### 3. Generate Context-Specific Questions with Understanding Validation
 After reading the context files, ask the human 3-5 specific questions based on what you discovered, then validate your understanding.

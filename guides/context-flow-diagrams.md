@@ -94,6 +94,7 @@ Start session: Read context (session-handoff, current-iteration, environment, fa
 3. **environment.md** (ESSENTIAL) - Hardware/software constraints
 4. **failed-solutions/** (MANDATORY) - Avoid suggesting failed approaches
 5. **assumptions-log.md** (REFERENCE) - Validation history and evidence
+6. **static/resources/** (ON-DEMAND) - Technical documentation, PDFs, datasheets when needed
 
 ### Context Analysis Process:
 ```mermaid
@@ -103,7 +104,39 @@ flowchart LR
     C --> D["🤖 LLM: Determine Priorities"]
     D --> E["🤖 LLM: Generate Specific Questions"]
     E --> F["🤖 LLM: Ask Human for Clarification"]
+    F --> G{"🤖 LLM: Need Technical Documentation?"}
+    G -->|Yes| H["🤖 LLM: Access static/resources/ (PDFs, datasheets)"]
+    G -->|No| I["🤖 LLM: Continue with Session"]
+    H --> I
 ```
+
+### On-Demand Resource Access (static/resources/)
+
+**When to Access static/resources/:**
+- **Hardware troubleshooting** - Need processor specifications, pin configurations
+- **Performance optimization** - Need VPU capabilities, memory architecture details  
+- **Protocol implementation** - Need interface specifications, timing requirements
+- **Error diagnosis** - Need register maps, error code definitions
+- **Feature validation** - Need capability matrices, supported formats
+
+**How LLM Should Use Resources:**
+```mermaid
+flowchart TD
+    A["🤖 LLM: Identifies Need for Technical Documentation"] --> B["🤖 LLM: Check static/resources/README.md"]
+    B --> C["🤖 LLM: Select Relevant PDF/Document"]
+    C --> D["🤖 LLM: Extract Specific Section (not entire document)"]
+    D --> E["🤖 LLM: Apply Information to Current Problem"]
+    E --> F["🤖 LLM: Reference Page Numbers in Solution"]
+    F --> G["🤖 LLM: Update Context with Key Findings"]
+```
+
+**Resource Usage Examples:**
+- **"Need i.MX8MP VPU specs"** → Read `IMX8MPRM-Rev-1.06.pdf` Chapter 8
+- **"GStreamer hardware acceleration failing"** → Read `i.MX8GStreamerUserGuide.pdf` Section 3
+- **"MIPI CSI interface issues"** → Read `IMX8MPRM-Rev-1.06.pdf` Chapter 12
+- **"Performance optimization needed"** → Read both documents for relevant sections
+
+**Important:** Resources are accessed **during the session** when specific technical information is needed, not during initial context loading.
 
 ## Detailed Context Saving Process
 
