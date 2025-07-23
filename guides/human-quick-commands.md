@@ -7,6 +7,28 @@
 Start session: Read context (session-handoff, current-iteration, environment, failed-solutions), ask 3-5 specific questions based on what you find, then summarize status and next actions.
 ```
 
+### Project Type-Specific Session Start (Copy-Paste)
+
+#### Technical Projects
+```
+Start technical session: Read context (session-handoff, current-iteration, environment, working-solutions), ask about programming language/platform/frameworks, focus on implementation and integration, summarize technical status and next development actions.
+```
+
+#### Research Projects  
+```
+Start research session: Read context (session-handoff, current-iteration, assumptions-log, validation), ask about research question/methodology/hypothesis, focus on evidence collection and validation, summarize research status and next investigation actions.
+```
+
+#### Documentation Projects
+```
+Start documentation session: Read context (session-handoff, current-iteration, project-plan, external-resources), ask about audience/scope/format requirements, focus on content creation and organization, summarize documentation status and next writing actions.
+```
+
+#### Collaborative Projects
+```
+Start collaborative session: Read context (session-handoff, current-iteration, assumptions-log, working-solutions), ask about team members/decision process/communication channels, focus on coordination and knowledge sharing, summarize team status and next collaboration actions.
+```
+
 ### Session End (Copy-Paste)  
 ```
 End session: Compile knowledge (update working-solutions.md, failed-solutions/, create daily log in archive/daily-logs/), update session-handoff.md and current-iteration.md, update knowledge base in static/knowledge-base/, ask closure questions about knowledge completeness and next priorities.

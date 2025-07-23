@@ -11,6 +11,8 @@ This guide provides step-by-step instructions for any LLM to recreate the comple
 - **Automate assumption validation** with reusable Python framework
 - **Enable seamless handoffs** between different LLM sessions
 - **Support hypothesis-driven development** with evidence tracking
+- **Provide project type intelligence** with domain-specific optimization
+- **Enable agile planning** with automatic schedule adaptation
 
 ## 🔄 Knowledge vs. Context Separation (CRITICAL)
 
@@ -70,6 +72,60 @@ project-root/
 - **Cross-references**: Maintained to ensure context can quickly access relevant knowledge
 
 **IMPORTANT**: The `guides/system-setup-instructions.md` file should **NEVER be deleted** as it contains the complete system recreation instructions.
+
+---
+
+## 🎯 Step 0: Project Type Selection (NEW - v2.0)
+
+### Project Type Intelligence
+The system now supports **domain-specific optimization** based on project type. Choose the appropriate type for optimal LLM behavior and context organization:
+
+#### **Technical Projects**
+- **Focus:** Implementation, debugging, system integration
+- **LLM Behavior:** Asks about programming languages, platforms, frameworks
+- **Optimized Files:** environment.md (detailed), working-solutions.md (code-focused), failed-solutions/ (debugging)
+- **Success Metrics:** Functional requirements, performance benchmarks, integration tests
+
+#### **Research Projects**
+- **Focus:** Hypothesis validation, evidence collection, systematic investigation
+- **LLM Behavior:** Asks about research questions, methodology, hypotheses
+- **Optimized Files:** assumptions-log.md (detailed), validation.md (methodology), external-resources.md (literature)
+- **Success Metrics:** Experimental results, data quality, statistical significance
+
+#### **Documentation Projects**
+- **Focus:** Content creation, organization, knowledge management
+- **LLM Behavior:** Asks about audience, scope, format requirements
+- **Optimized Files:** project-plan.md (content architecture), external-resources.md (references), working-solutions.md (templates)
+- **Success Metrics:** Content completeness, accuracy, user feedback
+
+#### **Collaborative Projects**
+- **Focus:** Team coordination, communication, shared decision-making
+- **LLM Behavior:** Asks about team members, decision processes, communication channels
+- **Optimized Files:** session-handoff.md (coordination), assumptions-log.md (decisions), working-solutions.md (team knowledge)
+- **Success Metrics:** Team productivity, communication effectiveness, decision quality
+
+### Project Type-Specific Session Commands
+Based on your project type, use the appropriate session start command:
+
+#### Technical Projects
+```
+Start technical session: Read context (session-handoff, current-iteration, environment, working-solutions), ask about programming language/platform/frameworks, focus on implementation and integration, summarize technical status and next development actions.
+```
+
+#### Research Projects
+```
+Start research session: Read context (session-handoff, current-iteration, assumptions-log, validation), ask about research question/methodology/hypothesis, focus on evidence collection and validation, summarize research status and next investigation actions.
+```
+
+#### Documentation Projects
+```
+Start documentation session: Read context (session-handoff, current-iteration, project-plan, external-resources), ask about audience/scope/format requirements, focus on content creation and organization, summarize documentation status and next writing actions.
+```
+
+#### Collaborative Projects
+```
+Start collaborative session: Read context (session-handoff, current-iteration, assumptions-log, working-solutions), ask about team members/decision process/communication channels, focus on coordination and knowledge sharing, summarize team status and next collaboration actions.
+```
 
 ---
 

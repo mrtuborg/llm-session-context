@@ -21,8 +21,9 @@ from pathlib import Path
 from datetime import datetime
 
 class LLMContextDeployer:
-    def __init__(self, target_directory):
+    def __init__(self, target_directory, project_type="technical"):
         self.target_dir = Path(target_directory).resolve()
+        self.project_type = project_type
         self.script_dir = Path(__file__).parent.resolve()
         self.guides_dir = self.script_dir / "guides"
         self.templates_dir = self.script_dir / "templates"
@@ -185,10 +186,86 @@ LM_context/
 """
 
     def generate_session_handoff_template(self):
-        """Generate session handoff template."""
+        """Generate project-type-specific session handoff template."""
+        
+        # Project-type-specific customizations
+        project_configs = {
+            "technical": {
+                "iteration_goal": "Technical Implementation & System Integration",
+                "hypothesis": "The technical system can be implemented with current tools and environment",
+                "experiment": "Setting up development environment and testing basic functionality",
+                "priorities": [
+                    "Set up development environment and verify all tools work",
+                    "Implement basic functionality and test core features",
+                    "Debug any integration issues and document solutions"
+                ],
+                "working_state": "Development environment with IDE, build tools, and testing framework",
+                "resources": "Technical documentation, API references, development tools",
+                "completion_criteria": [
+                    "Development environment fully configured and tested",
+                    "Basic functionality implemented and working",
+                    "Core integration points validated and documented"
+                ]
+            },
+            "research": {
+                "iteration_goal": "Research Design & Hypothesis Validation",
+                "hypothesis": "The research question can be systematically investigated with available methods",
+                "experiment": "Designing research methodology and conducting initial validation",
+                "priorities": [
+                    "Define research question and methodology clearly",
+                    "Conduct literature review and identify key sources",
+                    "Design experiments and validation framework"
+                ],
+                "working_state": "Research environment with literature access and analysis tools",
+                "resources": "Academic papers, research databases, analysis software",
+                "completion_criteria": [
+                    "Research question clearly defined and scoped",
+                    "Literature review completed with key insights documented",
+                    "Experimental design validated and ready for execution"
+                ]
+            },
+            "documentation": {
+                "iteration_goal": "Documentation Architecture & Content Creation",
+                "hypothesis": "Comprehensive documentation can be created systematically with clear structure",
+                "experiment": "Establishing documentation framework and creating initial content",
+                "priorities": [
+                    "Design documentation architecture and information hierarchy",
+                    "Create templates and style guides for consistent content",
+                    "Develop initial content sections and validate approach"
+                ],
+                "working_state": "Documentation environment with writing tools and content management",
+                "resources": "Style guides, content templates, collaboration tools",
+                "completion_criteria": [
+                    "Documentation architecture designed and validated",
+                    "Content templates created and tested",
+                    "Initial documentation sections completed and reviewed"
+                ]
+            },
+            "collaborative": {
+                "iteration_goal": "Team Coordination & Collaboration Framework",
+                "hypothesis": "Effective collaboration can be achieved through systematic coordination and communication",
+                "experiment": "Establishing collaboration processes and testing team coordination",
+                "priorities": [
+                    "Set up collaboration tools and communication channels",
+                    "Define team roles, responsibilities, and workflows",
+                    "Establish decision-making processes and documentation standards"
+                ],
+                "working_state": "Collaborative environment with shared tools and communication channels",
+                "resources": "Collaboration platforms, communication tools, shared repositories",
+                "completion_criteria": [
+                    "Collaboration framework established and tested",
+                    "Team roles and workflows clearly defined",
+                    "Communication processes validated and documented"
+                ]
+            }
+        }
+        
+        config = project_configs.get(self.project_type, project_configs["technical"])
+        
         return f"""# Project Session Handoff
 **Last Updated:** {datetime.now().strftime('%B %d, %Y, %I:%M %p')}
-**Current Iteration:** 1 - Project Setup & Initial Learning
+**Project Type:** {self.project_type.title()}
+**Current Iteration:** 1 - {config['iteration_goal']}
 
 ## Context Freshness Status
 - **Environment:** ✅ CURRENT (verified {datetime.now().strftime('%Y-%m-%d')}) - Development environment set up
@@ -199,34 +276,34 @@ LM_context/
 **LLM Optimization:** Only read files marked ⚠️ NEEDS_UPDATE to save tokens
 
 ## Iteration Context
-**Hypothesis Being Tested:** [CUSTOMIZE: Your current hypothesis or learning goal]
+**Hypothesis Being Tested:** {config['hypothesis']}
 
-**Current Experiment:** [CUSTOMIZE: What you're currently working on]
+**Current Experiment:** {config['experiment']}
 
-**Progress:** 10% complete - Project structure created, ready to begin learning
+**Progress:** 10% complete - Project structure created, ready to begin {self.project_type} work
 
 ## Immediate Next Actions (Priority Order)
-1. **PRIORITY 1:** [CUSTOMIZE: Your most important next task]
-2. **PRIORITY 2:** [CUSTOMIZE: Second priority task]
-3. **PRIORITY 3:** [CUSTOMIZE: Third priority task]
+1. **PRIORITY 1:** {config['priorities'][0]}
+2. **PRIORITY 2:** {config['priorities'][1]}
+3. **PRIORITY 3:** {config['priorities'][2]}
 
 ## Current Working State
-**Development Environment:** [CUSTOMIZE: Your development setup]
+**Development Environment:** {config['working_state']}
 **Project Location:** `{self.target_dir}`
-**Key Resources:** [CUSTOMIZE: Important documentation, tools, etc.]
+**Key Resources:** {config['resources']}
 
 ## Blockers/Risks
-- **None currently identified** - New project setup
-- [CUSTOMIZE: Add any known blockers or risks]
+- **None currently identified** - New {self.project_type} project setup
+- [CUSTOMIZE: Add any known blockers or risks specific to {self.project_type} work]
 
 ## Definition of Done for Current Iteration
-- [ ] [CUSTOMIZE: Specific, measurable completion criteria]
-- [ ] [CUSTOMIZE: Additional completion criteria]
-- [ ] [CUSTOMIZE: More completion criteria]
+- [ ] {config['completion_criteria'][0]}
+- [ ] {config['completion_criteria'][1]}
+- [ ] {config['completion_criteria'][2]}
 
 ## Context for Next Session
-**If Iteration 1 Complete:** [CUSTOMIZE: What should happen next]
-**If Iteration 1 Continues:** [CUSTOMIZE: How to continue current work]
+**If Iteration 1 Complete:** Move to Iteration 2 - Advanced {self.project_type.title()} Implementation
+**If Iteration 1 Continues:** Continue with current {self.project_type} setup and validation
 
 ## Files to Read First in New Session
 1. **CRITICAL:** `dynamic/current-iteration.md` - Active iteration status
@@ -235,9 +312,9 @@ LM_context/
 4. **CONTEXT:** `README.md` - Project overview and goals
 
 ## Project Development Notes
-- Project structure created using LLM Context Management System
-- Ready to begin systematic learning and development
-- All context management tools in place
+- {self.project_type.title()} project structure created using LLM Context Management System
+- Ready to begin systematic {self.project_type} development and learning
+- All context management tools configured for {self.project_type} workflows
 
 """
 
@@ -722,6 +799,13 @@ Examples:
     )
     
     parser.add_argument(
+        "--project-type",
+        choices=["technical", "research", "documentation", "collaborative"],
+        default="technical",
+        help="Project type for customized templates (default: technical)"
+    )
+    
+    parser.add_argument(
         "--force",
         action="store_true",
         help="Force deployment even if target directory exists and is not empty"
@@ -738,7 +822,7 @@ Examples:
         sys.exit(1)
     
     # Deploy the system
-    deployer = LLMContextDeployer(target_path)
+    deployer = LLMContextDeployer(target_path, args.project_type)
     deployer.deploy()
 
 if __name__ == "__main__":

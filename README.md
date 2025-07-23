@@ -12,9 +12,63 @@
 # Navigate to your project directory
 cd /path/to/your/project
 
-# Run the deployment script
-python /path/to/LLM_Context_System/deploy.py --target-dir ./LM_context
+# Run the deployment script with project type
+python /path/to/LLM_Context_System/deploy.py --project-type technical --target-dir ./LM_context
+
+# Available project types:
+# --project-type technical     # For software development, hardware integration
+# --project-type research      # For research projects, hypothesis testing
+# --project-type documentation # For documentation and knowledge management
+# --project-type collaborative # For team projects and coordination
 ```
+
+**Project Type Customization:**
+- **Technical:** Optimized for software development, debugging, and hardware integration
+- **Research:** Focused on hypothesis testing, experimentation, and systematic investigation
+- **Documentation:** Designed for knowledge compilation, documentation creation, and information management
+- **Collaborative:** Enhanced for team coordination, decision tracking, and multi-contributor projects
+
+#### **How Project Types Affect Deployment**
+
+The `--project-type` argument **significantly customizes** the generated context files:
+
+**Technical Projects Get:**
+- **Iteration Goal:** "Technical Implementation & System Integration"
+- **Initial Hypothesis:** "The technical system can be implemented with current tools and environment"
+- **Priority Actions:** Development environment setup → Basic functionality implementation → Integration debugging
+- **Working Environment:** "Development environment with IDE, build tools, and testing framework"
+- **Key Resources:** "Technical documentation, API references, development tools"
+- **LLM Behavior:** Asks about programming languages, suggests debugging strategies, focuses on code architecture
+
+**Research Projects Get:**
+- **Iteration Goal:** "Research Design & Hypothesis Validation"
+- **Initial Hypothesis:** "The research question can be systematically investigated with available methods"
+- **Priority Actions:** Research question definition → Literature review → Experimental design
+- **Working Environment:** "Research environment with literature access and analysis tools"
+- **Key Resources:** "Academic papers, research databases, analysis software"
+- **LLM Behavior:** Asks about methodology, suggests experimental validation, focuses on systematic investigation
+
+**Documentation Projects Get:**
+- **Iteration Goal:** "Documentation Architecture & Content Creation"
+- **Initial Hypothesis:** "Comprehensive documentation can be created systematically with clear structure"
+- **Priority Actions:** Documentation architecture design → Template creation → Initial content development
+- **Working Environment:** "Documentation environment with writing tools and content management"
+- **Key Resources:** "Style guides, content templates, collaboration tools"
+- **LLM Behavior:** Asks about audience and scope, suggests organization strategies, focuses on content structure
+
+**Collaborative Projects Get:**
+- **Iteration Goal:** "Team Coordination & Collaboration Framework"
+- **Initial Hypothesis:** "Effective collaboration can be achieved through systematic coordination and communication"
+- **Priority Actions:** Collaboration tool setup → Role definition → Process establishment
+- **Working Environment:** "Collaborative environment with shared tools and communication channels"
+- **Key Resources:** "Collaboration platforms, communication tools, shared repositories"
+- **LLM Behavior:** Asks about team dynamics, suggests coordination tools, focuses on workflow design
+
+**Impact on LLM Sessions:**
+- **Context Priming:** LLM immediately understands project domain and appropriate methodology
+- **Targeted Questions:** Domain-specific questions instead of generic "What are you working on?"
+- **Appropriate Solutions:** Domain best practices and relevant tools/approaches
+- **Maintained Focus:** Consistent domain-specific guidance throughout project lifecycle
 
 ### **Step 2: Start Working with Your LLM**
 Simply copy-paste this command to your LLM to begin:
