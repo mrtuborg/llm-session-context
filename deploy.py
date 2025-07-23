@@ -36,23 +36,12 @@ class LLMContextDeployer:
         if not self.guides_dir.exists():
             raise FileNotFoundError(f"Guides directory not found: {self.guides_dir}")
             
-        required_guides = [
-            "llm-session-quick-start.md",
-            "human-quick-commands.md", 
-            "session-knowledge-compilation.md",
-            "system-setup-instructions.md",
-            "troubleshooting-comprehensive.md"
-        ]
-        
-        missing_guides = []
-        for guide in required_guides:
-            if not (self.guides_dir / guide).exists():
-                missing_guides.append(guide)
-                
-        if missing_guides:
-            raise FileNotFoundError(f"Missing required guides: {missing_guides}")
+        # Check for available guides (don't require all to exist)
+        available_guides = list(self.guides_dir.glob("*.md"))
+        if not available_guides:
+            raise FileNotFoundError(f"No guide files found in: {self.guides_dir}")
             
-        print("✅ Environment validation passed")
+        print(f"✅ Environment validation passed - Found {len(available_guides)} guide files")
         
     def create_directory_structure(self):
         """Create the standard LM_context directory structure."""
@@ -60,6 +49,9 @@ class LLMContextDeployer:
         
         directories = [
             "LM_context",
+            "LM_context/human-guides",
+            "LM_context/llm-guides", 
+            "LM_context/system-docs",
             "LM_context/static",
             "LM_context/static/knowledge-base", 
             "LM_context/static/resources",
@@ -67,7 +59,9 @@ class LLMContextDeployer:
             "LM_context/dynamic",
             "LM_context/dynamic/failed-solutions",
             "LM_context/archive",
-            "LM_context/archive/daily-logs"
+            "LM_context/archive/daily-logs",
+            "LM_context/knowledge",
+            "LM_context/knowledge/foundational-elements"
         ]
         
         for directory in directories:
@@ -76,16 +70,41 @@ class LLMContextDeployer:
             print(f"  ✅ Created: {directory}")
             
     def copy_system_guides(self):
-        """Copy all system guide files to the target directory."""
+        """Copy all system guide files to the target directory with new organization."""
         print("📋 Copying system guides...")
         
-        guides_target = self.target_dir / "guides"
-        guides_target.mkdir(exist_ok=True)
+        # Define guide categories and their target directories
+        guide_categories = {
+            "human-guides": [
+                "human-maintenance-guide.md",
+                "human-quick-commands.md"
+            ],
+            "llm-guides": [
+                "llm-session-quick-start.md", 
+                "llm-context-question-guide.md"
+            ],
+            "system-docs": [
+                "context-flow-diagrams.md",
+                "cost-optimization-analysis.md",
+                "session-knowledge-compilation.md",
+                "system-setup-instructions.md",
+                "troubleshooting-comprehensive.md"
+            ]
+        }
         
-        for guide_file in self.guides_dir.glob("*.md"):
-            target_file = guides_target / guide_file.name
-            shutil.copy2(guide_file, target_file)
-            print(f"  ✅ Copied: {guide_file.name}")
+        # Copy guides to their appropriate directories
+        for category, guide_files in guide_categories.items():
+            target_dir = self.target_dir / "LM_context" / category
+            target_dir.mkdir(exist_ok=True)
+            
+            for guide_file in guide_files:
+                source_file = self.guides_dir / guide_file
+                if source_file.exists():
+                    target_file = target_dir / guide_file
+                    shutil.copy2(source_file, target_file)
+                    print(f"  ✅ Copied: {category}/{guide_file}")
+                else:
+                    print(f"  ⚠️  Missing: {guide_file} (will be created as placeholder)")
             
     def create_template_files(self):
         """Create template files for the new project."""
@@ -97,6 +116,13 @@ class LLMContextDeployer:
         with open(readme_path, 'w') as f:
             f.write(readme_content)
         print("  ✅ Created: LM_context/README.md")
+        
+        # Create collaboration-workflow.md
+        collaboration_content = self.generate_collaboration_workflow()
+        collaboration_path = self.target_dir / "LM_context" / "collaboration-workflow.md"
+        with open(collaboration_path, 'w') as f:
+            f.write(collaboration_content)
+        print("  ✅ Created: LM_context/collaboration-workflow.md")
         
         # Create session-handoff.md template
         handoff_content = self.generate_session_handoff_template()
@@ -127,6 +153,93 @@ class LLMContextDeployer:
         os.chmod(validator_path, 0o755)  # Make executable
         print("  ✅ Created: dynamic/assumption-validator.py")
         
+    def generate_collaboration_workflow(self):
+        """Generate collaboration workflow template."""
+        return """# Human-LLM Collaboration Workflow
+
+## Core Cooperation Model
+
+This document defines the fundamental collaboration patterns between humans and LLMs in the context management system.
+
+## Context Restoration Flow (Session Start)
+
+```mermaid
+flowchart TD
+    A["👤 HUMAN: Starts Session"] --> B{"👤 HUMAN: Copy-Paste Session Command?"}
+    B -->|Yes| C["🤖 LLM: Reads Session Command"]
+    B -->|No| D["🤖 LLM: Generic Start"]
+    
+    C --> E["🤖 LLM: Read session-handoff.md"]
+    E --> F["🤖 LLM: Read current-iteration.md"]
+    F --> G["🤖 LLM: Read static/environment.md"]
+    G --> H["🤖 LLM: Check dynamic/failed-solutions/"]
+    H --> I["🤖 LLM: Read evolving/assumptions-log.md"]
+    
+    I --> J["🤖 LLM: Analyze Context Files"]
+    J --> K["🤖 LLM: Generate 3-5 Specific Questions"]
+    K --> L["🤖 LLM: Ask Context-Based Questions"]
+    L --> M["👤 HUMAN: Responds to Questions"]
+    M --> N["🤖 LLM: Understands Current State"]
+    N --> O["🤖 LLM: Begin Productive Session"]
+    
+    D --> P["🤖 LLM: Ask Generic Questions"]
+    P --> Q["👤 HUMAN: Provides Context Manually"]
+    Q --> R["🤖 LLM: Less Efficient Session Start"]
+```
+
+## Actor Responsibilities
+
+### Human Responsibilities
+- **Session Initiation**: Use copy-paste commands for optimal context restoration
+- **Question Response**: Provide clear, specific answers to LLM context questions
+- **Session Closure**: Trigger proper session end to preserve context
+- **Quality Validation**: Confirm LLM understanding and context accuracy
+- **Priority Setting**: Guide LLM on next session priorities and focus areas
+
+### LLM Responsibilities
+- **Context Reading**: Read files in priority order with validation
+- **Question Generation**: Ask specific, context-based questions (not generic)
+- **Understanding Validation**: Confirm correct interpretation of context
+- **Knowledge Compilation**: Update all relevant context files during closure
+- **Handoff Preparation**: Prepare clear context for next session
+
+## Collaboration Principles
+
+### 1. Context-First Approach
+- **Human**: Provides structured context through files, not lengthy explanations
+- **LLM**: Reads context systematically before asking questions
+- **Benefit**: Efficient session starts with complete understanding
+
+### 2. Question-Driven Clarification
+- **Human**: Responds to specific questions rather than providing unsolicited information
+- **LLM**: Asks targeted questions based on context analysis
+- **Benefit**: Focused communication without information overload
+
+### 3. Validation Checkpoints
+- **Human**: Confirms LLM understanding at key decision points
+- **LLM**: Validates interpretation before proceeding with work
+- **Benefit**: Prevents work based on misunderstood context
+
+### 4. Knowledge Preservation
+- **Human**: Ensures proper session closure for context preservation
+- **LLM**: Documents all discoveries and updates context files
+- **Benefit**: Continuous knowledge building across sessions
+
+## Success Metrics
+
+### Collaboration Effectiveness
+- **Session Start Time**: <30 seconds from command to productive work
+- **Context Accuracy**: >95% of context correctly understood by LLM
+- **Knowledge Preservation**: 100% of discoveries captured in context files
+- **Session Continuity**: Seamless handoff between sessions
+
+---
+
+**Purpose:** Define the fundamental collaboration model between humans and LLMs
+**Audience:** Both humans and LLMs using the context management system
+**Usage:** Reference for proper collaboration patterns and quality validation
+"""
+
     def generate_project_readme(self):
         """Generate project-specific README content."""
         project_name = self.target_dir.name.replace('-', ' ').replace('_', ' ').title()
