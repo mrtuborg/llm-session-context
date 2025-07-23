@@ -13,15 +13,21 @@
 cd /path/to/your/project
 
 # Run the deployment script
-python /path/to/LLM_Context_System/deploy.py --project-type [technical|research|documentation] --target-dir ./LM_context
+python /path/to/LLM_Context_System/deploy.py --target-dir ./LM_context
 ```
 
-### **Step 2: Customize for Your Project**
-1. **Edit `LM_context/static/environment.md`** - Add your project-specific environment details
-2. **Update `LM_context/evolving/project-plan.md`** - Define your project structure and goals
-3. **Configure `LM_context/dynamic/current-iteration.md`** - Set your initial work context
+### **Step 2: LLM-Assisted Setup**
+When you first start working with your LLM assistant in the new project:
 
-### **Step 3: Start Using Your Context System**
+1. **Load the context system** by providing the LLM with the generated `LM_context/` files
+2. **The LLM will automatically analyze your project** and ask targeted questions to customize the system:
+   - Project type and domain
+   - Current objectives and goals
+   - Technical environment and constraints
+   - Preferred working methodology
+3. **The LLM will then customize** all context files based on your responses and project analysis
+
+### **Step 3: Start Using Your Optimized Context System**
 1. **Begin each LLM session** by loading the context files in this order:
    - `dynamic/current-iteration.md` (always)
    - `dynamic/session-handoff.md` (if continuing previous work)
