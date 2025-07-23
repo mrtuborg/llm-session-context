@@ -16,39 +16,87 @@ cd /path/to/your/project
 python /path/to/LLM_Context_System/deploy.py --target-dir ./LM_context
 ```
 
-### **Step 2: LLM-Assisted Setup**
-When you first start working with your LLM assistant in the new project:
+### **Step 2: Start Working with Your LLM**
+Simply copy-paste this command to your LLM to begin:
 
-1. **Load the context system** by providing the LLM with the generated `LM_context/` files
-2. **The LLM will automatically analyze your project** and ask targeted questions to customize the system:
-   - Project type and domain
-   - Current objectives and goals
-   - Technical environment and constraints
-   - Preferred working methodology
-3. **The LLM will then customize** all context files based on your responses and project analysis
+```
+Start session: Read context (session-handoff, current-iteration, environment, failed-solutions), ask 3-5 specific questions based on what you find, then summarize status and next actions.
+```
 
-### **Step 3: Start Using Your Optimized Context System**
-1. **Begin each LLM session** by loading the context files in this order:
-   - `dynamic/current-iteration.md` (always)
-   - `dynamic/session-handoff.md` (if continuing previous work)
-   - `evolving/` files (as needed for context)
-   - `static/` files (rarely, but when needed)
+**The LLM will automatically:**
+- Read and analyze your project context
+- Ask targeted questions to understand your current needs
+- Customize the system based on your project
+- Load the right files in the optimal order
+- Update all context files as you work
 
-2. **End each session** by updating:
-   - `dynamic/session-handoff.md` - Preserve context for next session
-   - `dynamic/working-solutions.md` - Add any solutions discovered
-   - `dynamic/current-iteration.md` - Update progress and next steps
+### **Step 3: End Each Session**
+Copy-paste this command when finishing:
 
-3. **Accumulate knowledge** by documenting:
-   - **Solutions that work** → `dynamic/working-solutions.md`
-   - **Approaches that failed** → `dynamic/failed-solutions/[domain]-failures.md`
-   - **Assumptions being tested** → `evolving/assumptions-log.md`
+```
+End session: Compile knowledge (update working-solutions.md, failed-solutions/, create daily log in archive/daily-logs/), update session-handoff.md and current-iteration.md, update knowledge base in static/knowledge-base/, ask closure questions about knowledge completeness and next priorities.
+```
+
+**The LLM will automatically:**
+- Save all solutions and failures discovered
+- Update session handoff for perfect continuity
+- Preserve all knowledge for future reuse
+- Prepare the next session context
 
 ### **Step 4: Optimize Your System**
 Run the validation script periodically to assess and improve your context system:
 ```bash
 cd your-project/LM_context
 python dynamic/assumption-validator.py
+```
+
+---
+
+## 🎯 Agile Planning & Schedule Adaptation
+
+### **Built-in Agile Framework**
+The system includes **comprehensive agile planning capabilities** that automatically adapt to schedule changes:
+
+#### **Iteration-Based Development**
+- **Current Iteration Tracking:** `dynamic/current-iteration.md` maintains active sprint context
+- **Hypothesis-Driven Development:** Each iteration tests specific hypotheses with measurable success criteria
+- **Adaptive Planning:** LLM automatically adjusts plans based on progress and blockers
+- **Schedule Flexibility:** System adapts to timeline changes while preserving progress
+
+#### **Automatic Schedule Updates**
+When you copy-paste the session commands, the LLM will:
+- **Assess current progress** against iteration goals and timeline
+- **Identify schedule risks** and suggest mitigation strategies
+- **Rebalance priorities** based on available time and resources
+- **Update iteration plans** to fit within schedule constraints
+- **Preserve critical path** while adjusting non-essential features
+
+#### **Agile Planning Features**
+```
+✅ Sprint Planning: Define iteration goals with success criteria
+✅ Daily Standups: Session-based progress tracking and blocker identification
+✅ Sprint Reviews: Automatic progress assessment and iteration closure
+✅ Retrospectives: Lessons learned capture and process improvement
+✅ Backlog Management: Priority-based feature and task management
+✅ Schedule Adaptation: Automatic plan adjustment for timeline changes
+```
+
+#### **Schedule Adaptation Commands**
+For schedule changes, use these additional commands:
+
+**Schedule Pressure (Deadline Moved Up):**
+```
+Schedule update: Deadline moved to [new date]. Analyze current iteration, identify minimum viable deliverables, rebalance priorities to fit timeline, update current-iteration.md with revised plan.
+```
+
+**Extended Timeline (More Time Available):**
+```
+Schedule update: Timeline extended to [new date]. Analyze current iteration, identify enhancement opportunities, add valuable features to scope, update current-iteration.md with expanded plan.
+```
+
+**Scope Change (Requirements Updated):**
+```
+Scope update: Requirements changed - [describe changes]. Analyze impact on current iteration, adjust priorities and timeline, update current-iteration.md with revised scope and schedule.
 ```
 
 ---

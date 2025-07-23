@@ -17,6 +17,28 @@ End session: Compile knowledge (update working-solutions.md, failed-solutions/, 
 System reset: Run assumption-validator.py, read working-solutions.md, update session-handoff.md with current technical state.
 ```
 
+### Agile Schedule Adaptation (Copy-Paste)
+
+#### Schedule Pressure (Deadline Moved Up)
+```
+Schedule update: Deadline moved to [new date]. Analyze current iteration, identify minimum viable deliverables, rebalance priorities to fit timeline, update current-iteration.md with revised plan.
+```
+
+#### Extended Timeline (More Time Available)
+```
+Schedule update: Timeline extended to [new date]. Analyze current iteration, identify enhancement opportunities, add valuable features to scope, update current-iteration.md with expanded plan.
+```
+
+#### Scope Change (Requirements Updated)
+```
+Scope update: Requirements changed - [describe changes]. Analyze impact on current iteration, adjust priorities and timeline, update current-iteration.md with revised scope and schedule.
+```
+
+#### Agile Plan Adaptation (General Changes)
+```
+Agile adaptation: Analyze current iteration progress, assess schedule constraints, rebalance priorities for maximum value delivery, update current-iteration.md with optimized plan that fits available time and resources.
+```
+
 ## ⚡ Quick Status Checks
 
 ### Before Starting Session
