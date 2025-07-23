@@ -163,6 +163,42 @@ cd /path/to/your/main/project
 ❌ WRONG in LM_context/: Complete melexis_v4l2.h API documentation
 ```
 
+### CRITICAL: guides/ vs knowledge/ Distinction (FOR LLM CONTEXT SYSTEM DEVELOPMENT)
+
+**When working on the LLM Context System itself:**
+
+**What goes in guides/ (System Instructions):**
+- **Session procedures** - How to start/end sessions
+- **Human commands** - Copy-paste commands for humans
+- **System setup** - How to recreate the system
+- **Troubleshooting** - How to fix system problems
+- **Maintenance** - How to maintain the system
+
+**What goes in knowledge/ (Learning Artifacts):**
+- **Development insights** - What we learned building the system
+- **Technical discoveries** - Architecture insights and design decisions
+- **Research findings** - Performance analysis and optimization studies
+- **Case studies** - Real project applications and lessons learned
+- **Foundational elements** - Core concepts and principles discovered
+
+**LLM Behavior Rules for LLM Context System Development:**
+- **DO:** Put development insights in knowledge/foundational-elements/
+- **DON'T:** Put development insights in guides/ (that's for instructions)
+- **DO:** Put system procedures in guides/ (how to use the system)
+- **DON'T:** Put learning outcomes in guides/ (that's for knowledge/)
+
+**Example - LLM Context System Development:**
+```
+✅ CORRECT in knowledge/: "Discovery: Archive directory is essential for system functionality"
+❌ WRONG in guides/: "Discovery: Archive directory is essential for system functionality"
+
+✅ CORRECT in guides/: "How to start an LLM session with validation"
+❌ WRONG in knowledge/: "How to start an LLM session with validation"
+
+✅ CORRECT in knowledge/: "Token optimization research: 74% reduction achieved"
+❌ WRONG in guides/: "Token optimization research: 74% reduction achieved"
+```
+
 ### ALWAYS Use Validation Script
 - **Never** manually test assumptions
 - **Always** use `python3 dynamic/assumption-validator.py`
