@@ -28,11 +28,6 @@ After reading the essential context files, identify:
    - Completion criteria status
    - Validation requirements
 
-4. **Knowledge Base Context**
-   - Are there any new or relevant guides in the `knowledge/` directory?
-   - Do any existing knowledge articles apply to the current task?
-   - Is there an opportunity to create a new knowledge article from the current work?
-
 ### Step 2: Generate Context-Specific Questions
 
 #### Based on Session Handoff Status
@@ -64,12 +59,6 @@ After reading the essential context files, identify:
 **If Hypothesis Testing in Progress:**
 - "The current iteration is testing [specific hypothesis]. Should we continue with this or pivot to something else?"
 - "I see [specific experiment] is active. What's the current status of this test?"
-
-#### Based on Knowledge Base Context
-
-**If a Relevant Guide Exists:**
-- "I found a `plugin-development-guide.md` in the knowledge base. Should we follow this guide for the task of creating the new GStreamer plugin?"
-- "The `performance-tuning-guide.md` seems relevant to our goal of reducing latency. Shall I apply the principles from that guide?"
 
 **If Multiple Priorities Listed:**
 - "The session handoff lists several next actions. Which should be the top priority for this session?"

@@ -85,7 +85,8 @@ class LLMContextDeployer:
             ],
             "llm-guides": [
                 "llm-session-quick-start.md", 
-                "llm-context-question-guide.md"
+                "llm-context-question-guide.md",
+                "llm-output-management-guide.md"  # New improvement from melexis-simple
             ]
         }
         
